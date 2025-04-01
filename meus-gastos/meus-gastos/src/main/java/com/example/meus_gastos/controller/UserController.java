@@ -1,6 +1,7 @@
 package com.example.meus_gastos.controller;
 
 import com.example.meus_gastos.DTOs.User.CreateUserDTO;
+import com.example.meus_gastos.DTOs.User.ResponseUserDTO;
 import com.example.meus_gastos.DTOs.User.UserUpdateDTO;
 import com.example.meus_gastos.domain.User.UserEntity;
 import com.example.meus_gastos.mapper.User.UserMap;
@@ -31,11 +32,9 @@ public class UserController {
     @Operation(summary = "Register a new user", description = "This operation is for registered a new user in our database")
     @ApiResponse(responseCode = "201", description = "The user was registered with successful in system")
     @ApiResponse(responseCode = "400", description = "Validation error")
-    public ResponseEntity<CreateUserDTO> createUser(@RequestBody CreateUserDTO userDTO) throws Exception {
-        UserEntity userEntity = userMap.toUserEntity(userDTO);
-        UserEntity userReturn = userService.createUser(userEntity);
-        CreateUserDTO dtoUser = userMap.toCreateUserDTO(userReturn);
-        return new ResponseEntity<>(dtoUser, HttpStatus.CREATED);
+    public ResponseEntity<ResponseUserDTO> createUser(@RequestBody CreateUserDTO userDTO) throws Exception {
+        ResponseUserDTO userReturn = userService.createUser(userDTO);
+        return new ResponseEntity<>(userReturn, HttpStatus.CREATED);
     }
 
     @GetMapping

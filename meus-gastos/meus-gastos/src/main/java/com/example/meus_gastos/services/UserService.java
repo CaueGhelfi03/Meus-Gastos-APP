@@ -1,5 +1,7 @@
 package com.example.meus_gastos.services;
 
+import com.example.meus_gastos.DTOs.User.CreateUserDTO;
+import com.example.meus_gastos.DTOs.User.ResponseUserDTO;
 import com.example.meus_gastos.DTOs.User.UserUpdateDTO;
 import com.example.meus_gastos.domain.User.UserEntity;
 import com.example.meus_gastos.mapper.User.UserMap;
@@ -21,11 +23,12 @@ public class UserService {
     @Autowired
     private UserMap userMap;
 
-    public UserEntity createUser(UserEntity user) throws Exception{
-        if(repository.existsById(user.getId())) throw new ResponseStatusException(HttpStatus.CONFLICT);
+    public ResponseUserDTO createUser(CreateUserDTO user) throws Exception{
+        UserEntity userEntity = userMap.toUserEntity(user);
+        if(repository.existsByDocument(userEntity.getDocument())) throw new ResponseStatusException(HttpStatus.CONFLICT);
+        repository.save(userEntity);
 
-        repository.save(user);
-        return user;
+        return new ResponseUserDTO(userEntity.getFirstName(), userEntity.getLastName(), userEntity.getEmail(), userEntity.getDocument());
     }
 
     public UserEntity findById(Long id){

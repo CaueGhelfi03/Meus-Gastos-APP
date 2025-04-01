@@ -18,11 +18,13 @@ public class ResponseTransactionDTO {
 
     private LocalDateTime timeStamp;
     private BigDecimal mount;
-    private UserEntity receiver;
     private PaymentMethods paymentMethod;
     private Integer numberOfInstallments;
     private BigDecimal installmentValues;
     private String receivingAccount;
     private String description;
 
+
+    public ResponseTransactionDTO(LocalDateTime timeStamp, BigDecimal mount, String receivingAccount, PaymentMethods paymentMethod, Integer numberOfInstallments, BigDecimal installmentValues, String receivingAccount1, String description) {
+    }
 }

@@ -9,5 +9,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findById (Long id);
     Optional<UserEntity> findByDocument (String document);
+    boolean existsByDocument(String document);
 
 }

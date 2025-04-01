@@ -28,4 +28,6 @@ public class ResponseCardDTO {
     @Enumerated(EnumType.STRING)
     private CardType cardType;
 
+    public ResponseCardDTO(Long id, String cardName, CardType cardType, String brand, BigDecimal balance, BigDecimal creditLimit) {
+    }
 }

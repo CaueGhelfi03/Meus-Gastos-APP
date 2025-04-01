@@ -40,11 +40,12 @@ public class TransactionService {
         if(repository.existsById(transaction.getId())) throw new ResponseStatusException(HttpStatus.CONFLICT, "Transaction already exists");
 
         if(transaction.getTimeStamp() == null){
-            transaction.setTimeStamp(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
-        }else{
-            transaction.setTimeStamp(transaction.getTimeStamp().atZone(ZoneId.of("UTC"))
-                                    .withZoneSameInstant(ZoneId.of("America/Sao_Paulo"))
-                                    .toLocalDateTime());
+            transaction.setTimeStamp(LocalDateTime.now(ZoneId.systemDefault()));
+        }else {
+            transaction.setTimeStamp(transaction.getTimeStamp()
+                    .atZone(ZoneId.systemDefault())  // Pega o fuso horário do sistema
+                    .withZoneSameInstant(ZoneId.of("America/Sao_Paulo"))  // Converte para São Paulo
+                    .toLocalDateTime());
         }
 
         UserEntity user = userService.findById(transaction.getSender().getId());

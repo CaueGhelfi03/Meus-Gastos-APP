@@ -4,9 +4,18 @@ import com.example.meus_gastos.domain.CardType;
 import com.example.meus_gastos.domain.User.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CreateCardDTO {
 
     @Size(max = 50)

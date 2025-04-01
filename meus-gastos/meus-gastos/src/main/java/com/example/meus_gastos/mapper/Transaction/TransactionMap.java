@@ -13,12 +13,11 @@ import java.time.ZoneId;
 @Mapper(componentModel = "spring")
 public interface TransactionMap {
 
-    CreateTransactionDTO toCreateTransactionDTO (TransactionsEntity transaction);
     TransactionsEntity toTransactionEntity(CreateTransactionDTO transactionDTO);
+    TransactionsEntity toTransactionEntity(ResponseTransactionDTO transactionDTO);
+    CreateTransactionDTO toCreateTransactionDTO (TransactionsEntity transaction);
     ResponseTransactionDTO toResponseDTO (CreateTransactionDTO transaction);
     ResponseTransactionDTO toResponseDTO (TransactionsEntity transaction);
-
-    TransactionsEntity toTransactionEntity(ResponseTransactionDTO transactionDTO);
 
     @AfterMapping
     default void setDefaultTimeStamp(@MappingTarget CreateTransactionDTO dto){
